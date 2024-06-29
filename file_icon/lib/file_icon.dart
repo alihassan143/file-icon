@@ -1,16 +1,17 @@
 import 'package:flutter/widgets.dart';
+
 import 'src/data.dart';
 
 class FileIcon extends StatelessWidget {
   final String fileName;
   final double size;
 
-  FileIcon(String fileName, {this.size})
+  FileIcon(String fileName, {this.size = 60})
       : this.fileName = fileName.toLowerCase();
 
   @override
   Widget build(BuildContext context) {
-    String key;
+    late String key;
 
     if (iconSetMap.containsKey(fileName)) {
       key = fileName;
@@ -26,17 +27,13 @@ class FileIcon extends StatelessWidget {
       }
     }
 
-    if (key == null) {
-      key = '.txt';
-    }
-
     return Icon(
       IconData(
-        iconSetMap[key].codePoint,
+        iconSetMap[key]!.codePoint,
         fontFamily: 'Seti',
         fontPackage: 'file_icon',
       ),
-      color: Color(iconSetMap[key].color),
+      color: Color(iconSetMap[key]!.color),
       size: size,
     );
   }
